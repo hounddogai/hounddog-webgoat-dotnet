@@ -45,12 +45,8 @@ namespace ClassifiedDocumentPortal.Infrastructure.Extensions
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ClassifiedDocumentPortalDbContext>();
-                
-                if (env.IsDevelopment())
-                {
-                    dbContext.Database.Migrate();
-                    ClassifiedDocumentPortalDbContextInitializer.Initialize(dbContext, serviceScope.ServiceProvider);
-                }
+                dbContext.Database.Migrate();
+                ClassifiedDocumentPortalDbContextInitializer.Initialize(dbContext, serviceScope.ServiceProvider);
             }
 
             return app;
